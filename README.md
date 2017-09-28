@@ -63,7 +63,9 @@ El contenido del documento solicita la información mostrada a continuación. El
 ### Adicionalmente se deben responder una serie de preguntas
 
 1.- Los print de pantalla de un flujo de pago exitoso de crédito (sin cuotas), además los datos del request y response de cada método (log).
+
 2.-  Los print de pantalla de un flujo de pago exitoso de crédito (con cuotas), además los datos del request y response de cada método (log).
+
 3.- Los print de pantalla de un flujo de pago exitoso de débito, además los datos del request y response de cada método (log).
  
 4.- Los print de pantalla de un flujo de pago rechazado, además los datos del request y response de cada método (log).
