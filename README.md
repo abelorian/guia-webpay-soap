@@ -77,8 +77,8 @@ El contenido del documento solicita la información mostrada a continuación. El
 8.- Los print de pantalla de un flujo de pago con una Orden de Compra duplicada, además los datos del request y response de cada método (log).Para realizar este flujo debes generar una transacción de autorización y luego realizar una nueva transacción con la misma Orden de Compra autorizada anteriormente, siempre debes validar contra la base de datos que la orden de compra no se encuentre autorizada, en caso de detectarse esta situación NO debes consumir el método acknowledgeTransaction, de esta forma generas una reversa forzada. Finalmente debes desplegar la página de rechazo.
  
 9.- Indicar si integrarán, el Webservice de Anulación, en caso que:
--- SI lo integren, indicar si realizaran anulaciones totales o parciales.
--- NO lo integren, el comercio (no el programador) debe indicar el motivo.
+- SI lo integren, indicar si realizaran anulaciones totales o parciales.
+- NO lo integren, el comercio (no el programador) debe indicar el motivo.
  
 10.- Enviar URL y datos de prueba (link producto, usuario y contraseña).
  
