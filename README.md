@@ -1,3 +1,5 @@
+** Aviso: El proceso de integración, validación y producción por parte de TBK es una 💩. Hay que tener mucha paciencia **
+
 
 # Guía de WebPay (Ruby on Rails)
 
@@ -15,24 +17,26 @@ Versión: 1.4.0
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Guía de Webpay</span> por <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.cervezapps.cl" property="cc:attributionName" rel="cc:attributionURL">Camilo Castro</a> se distribuye bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Licencia Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional</a>.
 
 
-# Integración
+# Integración con Ruby on Rails
 
-Gema :
+Gema : https://github.com/abelorian/transbank-webpay
+
+Basada en gema de usuario Clouw. Se le agregan los logs necesarios para el proceso de certificación
 
 
 
 # Proceso de Certificación
-Una vez configurado el KCC y esté funcionando con las claves de prueba se debe comenzar el proceso de certificación. Para ésto se debe verificar que los datos detallados en el Manual de Integración KCC 60 Anexo C (p. 54-55) se cumplan a cabalidad. El comercio debe tener la siguiente información: 
+Una vez configurada la gema y esté funcionando con las claves de prueba se debe comenzar el proceso de certificación. Para ésto se debe verificar que los datos detallados en el Manual de Integración KCC 60 Anexo C (p. 54-55) se cumplan a cabalidad. El comercio debe tener la siguiente información (depende del tipo de comercio): 
 
 * Página que explique los términos y condiciones del servicio.
 * Página que explique la política de devoluciones.
 * Página que explique la forma de entrega.
 
 ## Paso 1 - Documento de Pre - Certificación
-Transbank ha complicado el proceso de certificación exigiendo a los comercios enviar capturas de pantallas de diversas pruebas en un solo archivo pdf. Es necesario llenar un documento llamado *Evidencia Comercio.docx*, el cual está dentro del archivo descargable desde [Transbank Descargas](https://www.transbank.cl/public/productos-y-servicios/webpay/#descargas). En éste caso dentro del archivo llamado *linux_64_6.0.2.zip*. Dentro del documento se solicitan diferentes datos y responder una serie de preguntas. Una vez llenado se debe exportar en formato *pdf* y ser enviado a *soporte@transbank.cl* con una copia al contacto comercial. Finalmente se deben adjuntar los archivos generados en el proceso de compra llamados *tbk_bitacora* y *tbk_evn* correspondientes a la fecha donde se solicita la certificación.
+Transbank ha complicado el proceso de certificación exigiendo a los comercios enviar capturas de pantallas de diversas pruebas en un solo archivo pdf. Es necesario llenar un documento llamado *Evidencia Comercio.docx*, el cual está dentro del archivo descargable desde [Transbank Descargas](https://www.transbank.cl/public/productos-y-servicios/webpay/#descargas).Dentro del documento se solicitan diferentes datos y responder una serie de preguntas. Una vez llenado se debe exportar en formato *pdf* y ser enviado a *soporte@transbank.cl* con una copia al contacto comercial.
 
 ## Paso 2 - Llenar Documento Evidencia Comercio
-El contenido del documento solicita la información mostrada a continuación.
+El contenido del documento solicita la información mostrada a continuación. El documento y las preguntas pueden ir variando dependiendo del servicio contratado.
 
 ### Información de Comercio
 - Nombre Comercio
@@ -58,7 +62,7 @@ El contenido del documento solicita la información mostrada a continuación.
 
 ### Adicionalmente se deben responder una serie de preguntas
 
-- Flujo Pago Exitoso Sin Cuotas  
+- Los print de pantalla de un flujo de pago exitoso de crédito (sin cuotas), además los datos del request y response de cada método (log).
 - Flujo Pago Exitoso 3 Cuotas Sin Interés
 - Flujo de Pago Exitoso 4 Cuotas (normales, con interés)
 - Flujo de Pago Exitoso con Tarjeta de Débito RedCompra
