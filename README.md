@@ -63,12 +63,42 @@ El contenido del documento solicita la información mostrada a continuación. El
 ### Adicionalmente se deben responder una serie de preguntas
 
 - Los print de pantalla de un flujo de pago exitoso de crédito (sin cuotas), además los datos del request y response de cada método (log).
-- Flujo Pago Exitoso 3 Cuotas Sin Interés
-- Flujo de Pago Exitoso 4 Cuotas (normales, con interés)
-- Flujo de Pago Exitoso con Tarjeta de Débito RedCompra
-- Flujo de Pago Fracaso con tarjeta de crédito MasterCard
-- Validación de Orden de Compra
-- Validación de Página de Cierre
+-  Los print de pantalla de un flujo de pago exitoso de crédito (con cuotas), además los datos del request y response de cada método (log).
+- Los print de pantalla de un flujo de pago exitoso de débito, además los datos del request y response de cada método (log).
+ 
+- Los print de pantalla de un flujo de pago rechazado, además los datos del request y response de cada método (log).
+ 
+- El print de pantalla que se despliega, después de presionar el botón “Anular” del Formulario de Webpay y explicar la estrategia utilizada para controlar este flujo. (Debe redirigir a la página de rechazo)
+ 
+- Describir el código fuentey explicar las partes en que se realizan las validaciones del certificado de Transbank para cada método. Recordar que se debe validar que todos los response provienen de Transbank.
+ 
+- El print de pantalla que se despliega cuando el certificado no pertenece a Transbank y explicar la estrategia utilizada para controlar este flujo. (Debe redirigir a la página de rechazo)
+ 
+- Los print de pantalla de un flujo de pago con una Orden de Compra duplicada, además los datos del request y response de cada método (log).Para realizar este flujo debes generar una transacción de autorización y luego realizar una nueva transacción con la misma Orden de Compra autorizada anteriormente, siempre debes validar contra la base de datos que la orden de compra no se encuentre autorizada, en caso de detectarse esta situación NO debes consumir el método acknowledgeTransaction, de esta forma generas una reversa forzada. Finalmente debes desplegar la página de rechazo.
+ 
+- Indicar si integrarán, el Webservice de Anulación, en caso que:
+-- SI lo integren, indicar si realizaran anulaciones totales o parciales.
+-- NO lo integren, el comercio (no el programador) debe indicar el motivo.
+ 
+- Enviar URL y datos de prueba.
+ 
+ 
+
+ 
+# Evidencia Integración Transacción Anulación (en caso de que se implemente):
+ 
+1.- Los print de pantalla de un flujo de anulación total (todas las pantallas)
+ 
+2.- Los print de pantalla de un flujo de anulación parcial (todas las pantallas)
+ 
+3.- Los print de pantalla de un flujo de anulación error (se puede forzar el error con: anular monto superior al autorizado, orden de compra no existe, código de autorización no existe)
+ 
+4.- Describir el código fuente y explicar las partes en que se realizan la validación del certificado de Transbank del método de anulación.
+ 
+5.- El print de pantalla que se despliega cuando el certificado no pertenece a Transbank.
+ 
+6.- Enviar URL y datos de prueba.
+
 
 
 Para facilitar la entrega de datos se ha creado una plantilla de ejemplo disponible en [examples/Evidencia Comercio](examples/) en formato pdf, docx y pages. La cual contiene más detalles sobre como llenar la información y responder las preguntas.
@@ -160,44 +190,6 @@ Se debe reemplazar el archivo *privada.pem* por el generado con el programa. Tam
 > Todos los archivos deben ser subidos como ASCII. En linux verificar que los archivos terminen con el retorno de carro tipo UNIX.
 
 
-Ahora se debe modificar el archivo */cgi-bin/datos/tbk_config.dat* con los datos usados en producción, conservando los valores de los campos que no sean especificados en la siguiente tabla:
-
-Campo | Valor | Comentario
------------- | ------------- | ------------
-IDCOMERCIO | 5970xxxx | El Código de Comercio que Transbank dio.
-SERVERTRA  | https://webpay.transbank.cl | Servidor de Producción
-PORTTRA    | 443 | Puerto de Producción
-URLCGITRA  | /cgi-bin/bp_revision.cgi | URL del programa de revisión en Producción.
-URLCGIMEDTRA  | /cgi-bin/bp_validacion.cgi | URL del programa de validación en Producción
-
-Quedando de la siguiente forma:
-
-```	
-IDCOMERCIO = 597073392290
-MEDCOM = 2
-TBK_KEY_ID = 101
-PARAMVERIFCOM = 1
-URLCGICOM = http://cervezapps.cl/cgi-bin/tbk_bp_resultado.cgi
-SERVERCOM = 85.25.108.124
-PORTCOM = 80
-WHITELISTCOM = ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 0123456789./:=&?_
-HOST = 85.25.108.124
-WPORT = 80
-URLCGITRA = /cgi-bin/bp_revision.cgi
-URLCGIMEDTRA = /cgi-bin/bp_validacion.cgi
-SERVERTRA = https://webpay.transbank.cl
-PORTTRA = 443
-PREFIJO_CONF_TR = HTML_
-HTML_TR_NORMAL = http://cervezapps.cl/webpay/cierre.php
-```	
-
-**Nota**
-> MEDCOM = 1 puede ser usado si el comercio cuenta con SSL.
-
-**Nota 2**
-> Se debe anteponer el número 5970 como prefijo al número de comercio en IDCOMERCIO
-
-
 ## Paso 4 - Prueba Final
 Una vez configurado el sitio en producción se hará una prueba final para comprobar que todo este funcionando correctamente, una vez que Transbank informe que el comercio ha sido agregado se debe crear una compra.
 
@@ -212,16 +204,6 @@ usando este producto de prueba.
 
 ### Limpieza
 Una vez completado el proceso de paso a producción se recomienda limpiar todos los registros de las compras realizadas en el proceso de pruebas. Usuarios, carros de compra, estadísticas, etc.
-
-### Seguridad
-Se recomienda asegurar que solamente las siguientes IPs de Transbank puedan ejecutar los archivos en */cgi-bin/*:
-
-* 200.10.14.162
-* 200.10.14.163
-* 200.10.12.162
-* 200.10.12.163
-* 200.10.14.34
-* 200.10.14.177 
 
 ### Logo de Comercio
 Se puede enviar a Transbank un logotipo del comercio para mostrarse en el formulario de pago, ésto es totalmente opcional.
@@ -257,33 +239,6 @@ if ($total_order_amount_formatted == $tbk_total_amount) {
 	log("Amounts are Equal");
 }
 ```
-
-### Anexo B: Orden de los parámetros de Validación de MAC en Transacción Tipo Mall
-La transacción tipo Mall recibe parámetros con diferentes nombres que la transacción normal, para la validación del MAC de tipo Mall se requiere que el archivo temporal tenga escrito los parámetros en el siguiente orden: 
-
-	1) TBK_TIPO_TRANSACCION
-	2) TBK_RESPUESTA
-	3) TBK_MONTO
-	4) TBK_ORDEN_COMPRA
-	6) TBK_FINAL_NUMERO_TARJETA
-	7) TBK_FECHA_CONTABLE
-	8) TBK_FECHA_TRANSACCION
-	9) TBK_HORA_TRANSACCION
-	10) TBK_ID_SESION
-	11) TBK_ID_TRANSACCION
-	12) TBK_COD_AUT_M001
-	13) TBK_TIPO_PAGO_M001
-	14) TBK_NUMERO_CUOTAS_M001
-	15) TBK_COD_RESP_M001
-	16) TBK_MONTO_TIENDA_M001
-	17) TBK_ORDEN_TIENDA_M001
-	18) TBK_VCI_M001
-	19) TBK_VCI
-	20) TBK_MAC
-
-
-Ejemplo:
-	TBK_TIPO_TRANSACCION=TR_MALL&TBK_RESPUESTA=0...
 	
 ### Anexo C: Cuentas para Ejecutar Pruebas
 Al hacer pruebas siempre se deben utilizar alguna de las cuentas establecidas en el manual. A continuación se copian los datos.
@@ -307,63 +262,8 @@ Una vez autenticados, dentro del emisor podrán aceptar ó rechazar la transacci
 |--------|--------|
 |   4051885600446623     |   APROBADO     |
 |     5186059559590568   |     RECHAZADO   |
+| 12345678		 | APROBADO/RECHAZADO |
 
-### Anexo D: Amazon EC2
-Webpay puede tener algunas consideraciones adicionales para funcionar bien en servidores hospedados en Amazon.
-
-#### Permisos de la VPC
-Primero hay que autorizar explicitamente las IPs de Transbank en la VPC. Con el fin de evitar cualquier bloqueo de las llamadas realizadas por Transbank.
-
-```
-Ambiente de Certificación
-200.10.12.55
-
-Ambiente de Producción
-200.10.14.162
-200.10.14.163
-200.10.12.162
-200.10.12.163
-200.10.14.34
-200.10.14.177
-```
-
-#### Configuración de la IP Pública
-La IP pública del servidor, la cual es usada en el archivo *tbk_config.dat* debe poder ser usada para llamar directamente a los archivos del cgi-bin.
-
-**Ejemplo**
-
-La llamada a la dirección
-*http://54.xxx.yyy.zzz/cgi-bin/tbk_bp_pago.cgi*
-debe mostrar un logo de Webpay y no un error de servidor como
-500 o 400.
-
-Esto se debe a que los servidores de Transbank toman la IP Pública y la llaman directamente para realizar la validación con *tbk_bp_resultado.cgi*
-
-**Archivo tbk_config.dat**
-
-Si Los contenidos del archivo son los siguientes
-
-```
-(...)
-URLCGICOM = http://www.ejemplo.com/cgi-bin/tbk_bp_resultado.cgi
-SERVERCOM = 54.xxx.yyy.zzz
-(...)
-```
-
-Se debe verificar que se pueda ejecutar ambas direcciones bajo la url y la ip.
-**http://www.ejemplo.com/cgi-bin/tbk_bp_resultado.cgi** y **http://54.xxx.yyy.zzz/cgi-bin/tbk_bp_resultado.cgi** 
-y ambas den un resultado correcto.
-
-### Anexo E: Solución a comportamiento errático
-
-Cuando webpay lleva funcionando un tiempo considerable en el sitio (algunos años), puede que se presenten comportamientos erráticos en el sistema. Carros de compra no pagados, procesos no conclusos y otras eventualidades problemáticas. 
-Si bien las causas pueden ser diversas y ajenas al KCC, una posibilidad es que el directorio *cgi-bin/log* este saturado. Cuando existen demasiados archivos dentro del directorio *log* el KCC puede presentar comportamientos no deseados. La solución es mover estos archivos a un directorio nuevo y dejar limpio el directorio *log* para los nuevos logs.
-
-Para esto se deben mover los archivos a un nuevo directorio
-	
-	$ cd cgi-bin/log
-	$ mkdir backup
-	$ mv *.* backup
 
 ### Anexo F: Consideraciones al Pasar a Producción
 Se debe asegurar de que el código de comercio sea el adecuado o se puede encontrar con problemas no deseados al momento de realizar compras. Como no hay forma de saber si el código de comercio está habilitado para webpay plus es mejor preguntar a Transbank directamente antes de enviar los certificados de producción.
@@ -380,21 +280,3 @@ Normalmente los plugins disponibles y la configuración de esta guía operan baj
 ### Anexo H: TBK_CODIGO_AUTORIZACION y/o TBK_VCI
 Ambos códigos pueden contener letras además de números. Por lo que su validación debe considearlos como campos alfanuméricos y no solo numéricos. Normalmente sólo tendrán números, pero en pagos con tarjetas extranjeras pueden tener letras.
 
-### Anexo I: iOS
-Si se utiliza un WebView para mostrar el formulario de pago de webpay puede arrojar error al cargar ciertas urls. Se recomienda ignorarlas en el delegate del WebView
-
-```objective-c
-- (void) webView: (UIWebView *) webView didFailLoadWithError: (NSError *) error {
-    
-    if([error.userInfo[@"NSErrorFailingURLStringKey"] rangeOfString:@"https://webpay3g.transbank.cl/webpaymobile/redirect.cgi?_timestamp="].location != NSNotFound ||
-       
-       [error.userInfo[@"NSErrorFailingURLStringKey"] rangeOfString:@"https://webpay3g.transbank.cl/webpaymobile/clock2g.cgi?_timestamp="].location != NSNotFound ||
-       
-       [error.userInfo[@"NSErrorFailingURLStringKey"] rangeOfString:@"https://certificacion.webpay.cl:6443/webpaymobile/redirect.cgi?_timestamp="].location != NSNotFound ||
-       
-       [error.userInfo[@"NSErrorFailingURLStringKey"] rangeOfString:@"https://certificacion.webpay.cl:6443/webpaymobile/clock2g.cgi?_timestamp="].location != NSNotFound) {
-        
-        return;
-    }
-...
-}
