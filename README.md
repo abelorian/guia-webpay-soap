@@ -62,30 +62,30 @@ El contenido del documento solicita la información mostrada a continuación. El
 
 ### Adicionalmente se deben responder una serie de preguntas
 
-- Los print de pantalla de un flujo de pago exitoso de crédito (sin cuotas), además los datos del request y response de cada método (log).
--  Los print de pantalla de un flujo de pago exitoso de crédito (con cuotas), además los datos del request y response de cada método (log).
-- Los print de pantalla de un flujo de pago exitoso de débito, además los datos del request y response de cada método (log).
+1.- Los print de pantalla de un flujo de pago exitoso de crédito (sin cuotas), además los datos del request y response de cada método (log).
+2.-  Los print de pantalla de un flujo de pago exitoso de crédito (con cuotas), además los datos del request y response de cada método (log).
+3.- Los print de pantalla de un flujo de pago exitoso de débito, además los datos del request y response de cada método (log).
  
-- Los print de pantalla de un flujo de pago rechazado, además los datos del request y response de cada método (log).
+4.- Los print de pantalla de un flujo de pago rechazado, además los datos del request y response de cada método (log).
  
-- El print de pantalla que se despliega, después de presionar el botón “Anular” del Formulario de Webpay y explicar la estrategia utilizada para controlar este flujo. (Debe redirigir a la página de rechazo)
+5.- El print de pantalla que se despliega, después de presionar el botón “Anular” del Formulario de Webpay y explicar la estrategia utilizada para controlar este flujo. (Debe redirigir a la página de rechazo)
  
-- Describir el código fuentey explicar las partes en que se realizan las validaciones del certificado de Transbank para cada método. Recordar que se debe validar que todos los response provienen de Transbank.
+6.- Describir el código fuentey explicar las partes en que se realizan las validaciones del certificado de Transbank para cada método. Recordar que se debe validar que todos los response provienen de Transbank.
  
-- El print de pantalla que se despliega cuando el certificado no pertenece a Transbank y explicar la estrategia utilizada para controlar este flujo. (Debe redirigir a la página de rechazo)
+7.- El print de pantalla que se despliega cuando el certificado no pertenece a Transbank y explicar la estrategia utilizada para controlar este flujo. (Debe redirigir a la página de rechazo)
  
-- Los print de pantalla de un flujo de pago con una Orden de Compra duplicada, además los datos del request y response de cada método (log).Para realizar este flujo debes generar una transacción de autorización y luego realizar una nueva transacción con la misma Orden de Compra autorizada anteriormente, siempre debes validar contra la base de datos que la orden de compra no se encuentre autorizada, en caso de detectarse esta situación NO debes consumir el método acknowledgeTransaction, de esta forma generas una reversa forzada. Finalmente debes desplegar la página de rechazo.
+8.- Los print de pantalla de un flujo de pago con una Orden de Compra duplicada, además los datos del request y response de cada método (log).Para realizar este flujo debes generar una transacción de autorización y luego realizar una nueva transacción con la misma Orden de Compra autorizada anteriormente, siempre debes validar contra la base de datos que la orden de compra no se encuentre autorizada, en caso de detectarse esta situación NO debes consumir el método acknowledgeTransaction, de esta forma generas una reversa forzada. Finalmente debes desplegar la página de rechazo.
  
-- Indicar si integrarán, el Webservice de Anulación, en caso que:
+9.- Indicar si integrarán, el Webservice de Anulación, en caso que:
 -- SI lo integren, indicar si realizaran anulaciones totales o parciales.
 -- NO lo integren, el comercio (no el programador) debe indicar el motivo.
  
-- Enviar URL y datos de prueba.
+10.- Enviar URL y datos de prueba (link producto, usuario y contraseña).
  
  
 
  
-# Evidencia Integración Transacción Anulación (en caso de que se implemente):
+### Evidencia Integración Transacción Anulación (en caso de que se implemente):
  
 1.- Los print de pantalla de un flujo de anulación total (todas las pantallas)
  
@@ -97,7 +97,7 @@ El contenido del documento solicita la información mostrada a continuación. El
  
 5.- El print de pantalla que se despliega cuando el certificado no pertenece a Transbank.
  
-6.- Enviar URL y datos de prueba.
+6.- Enviar URL y datos de prueba (link producto, usuario y contraseña).
 
 
 
