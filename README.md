@@ -35,6 +35,8 @@ Una vez configurada la gema y esté funcionando con las claves de prueba se debe
 ## Paso 1 - Documento de Pre - Certificación
 Transbank ha complicado el proceso de certificación exigiendo a los comercios enviar capturas de pantallas de diversas pruebas en un solo archivo pdf. Es necesario llenar un documento llamado *Evidencia Comercio.docx*, el cual está dentro del archivo descargable desde [Transbank Descargas](https://www.transbank.cl/public/productos-y-servicios/webpay/#descargas).Dentro del documento se solicitan diferentes datos y responder una serie de preguntas. Una vez llenado se debe exportar en formato *pdf* y ser enviado a *soporte@transbank.cl* con una copia al contacto comercial.
 
+Otro ejemplo de documento: https://docs.google.com/document/d/1Zlhr4H5nIPLE3y2sNAl8F0x_6ljeA8PhhbkWi4rJZHQ/edit
+
 ## Paso 2 - Llenar Documento Evidencia Comercio
 El contenido del documento solicita la información mostrada a continuación. El documento y las preguntas pueden ir variando dependiendo del servicio contratado.
 
