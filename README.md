@@ -1,6 +1,3 @@
-** Aviso: El proceso de integración, validación y producción por parte de TBK es una 💩. Hay que tener mucha paciencia **
-
-
 # Guía de WebPay (Ruby on Rails)
 
 Créditos de guia original:
